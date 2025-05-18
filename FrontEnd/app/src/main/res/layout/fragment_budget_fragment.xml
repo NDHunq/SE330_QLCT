@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragment.Budget_fragment"
+    android:background="@color/white">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@color/xanhnen"
+            android:layout_height="55dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:text="Budgets"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="37dp"
+                android:layout_marginStart="15dp"
+                android:layout_height="match_parent">
+
+            </TextView>
+
+            <ImageView
+                android:id="@+id/bell"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="15dp"
+                android:layout_gravity="center"
+                android:background="@drawable/bell">
+
+            </ImageView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp">
+            <TextView
+                android:onClick="AddFragment"
+                android:id="@+id/running"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:text="Running"
+                android:background="@drawable/background_bo_trai"
+                android:textSize="18dp"
+                android:textColor="@color/xanhnen"
+
+                android:gravity="center">
+            </TextView>
+            <TextView
+                android:onClick="AddFragment"
+                android:id="@+id/finish"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:text="Finished"
+                android:background="@drawable/background_bo_phai"
+                android:backgroundTint="#ACACAC"
+                android:textSize="18dp"
+                android:textColor="@color/black"
+
+                android:gravity="center">
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/running_budget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="10dp"
+
+            android:background="@drawable/grey_background"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Amount you can spend"
+                android:textColor="@color/black"
+                android:textSize="16dp">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/remaining"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="200,000 đ"
+                android:textColor="@color/xanhdam"
+                android:textSize="22dp"
+                android:textStyle="bold"></TextView>
+
+            <SeekBar
+                android:id="@+id/seekBar"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:thumbTint="#0091D5"
+                android:progressTint="@color/xanhnendam">
+
+            </SeekBar>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total spent"
+                        android:textColor="@color/black"
+                        android:textSize="16dp">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/total_spent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="200,000 đ"
+                        android:textColor="@color/Expense"
+                        android:textSize="20dp"
+                        android:textStyle="bold"></TextView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total budgets"
+                        android:textColor="@color/black"
+                        android:textSize="16dp">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/total_budget"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="200,000 đ"
+                        android:textColor="#0091D5"
+                        android:textSize="20dp"
+                        android:textStyle="bold"></TextView>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:layout_weight="9"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/grey_background">
+
+            <FrameLayout
+                android:id="@+id/budget_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+            </FrameLayout>
+
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/create_bud_butt"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="20dp"
+                android:gravity="center"
+                android:text="Create Budget"
+                android:textColor="@color/white"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/grey_background"
+                android:backgroundTint="@color/xanhnen"
+                >
+
+            </TextView>
+        </RelativeLayout>
+    </LinearLayout>
+
+</FrameLayout>

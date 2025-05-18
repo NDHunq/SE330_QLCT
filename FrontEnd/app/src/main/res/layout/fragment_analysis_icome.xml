@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Analysis.AnalysisIcomeFragment"
+    android:background="@drawable/grey_background">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:text="Income"
+            android:textSize="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="left"
+            ></TextView>
+        <TextView
+            android:id="@+id/total_icome"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:textColor="#177715"
+            android:text="10000000 đ"
+            android:textSize="18dp"
+            android:layout_marginStart="15dp"
+            android:layout_gravity="left"
+            ></TextView>
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/piechart"
+            android:layout_width="match_parent"
+            android:layout_height="188dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp">
+
+        </com.github.mikephil.charting.charts.PieChart>
+        <TextView
+            android:id="@+id/detail_inc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:textStyle="bold"
+            android:textColor="@color/xanhnen"
+            android:text="See details"
+            android:textSize="18dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center"
+            ></TextView>
+    </LinearLayout>
+
+</FrameLayout>

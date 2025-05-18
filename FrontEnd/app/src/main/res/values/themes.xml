@@ -1,5 +1,44 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.QLCT" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
 
-    <style name="Theme.QLCT" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.QLCT" parent="Base.Theme.QLCT" />
+
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">
+            @anim/slide_in_bottom
+        </item>
+        <item name="android:windowExitAnimation">
+            @anim/slide_out_bottom
+        </item>
+    </style>
+    <style name="CustomListViewStyle" parent="@android:style/Widget.ListView">
+        <item name="android:divider">@android:color/transparent</item>
+        <item name="android:dividerHeight">7dp</item>
+    </style>
+
+    <style name="DialogAnimationn">
+        <item name="android:windowEnterAnimation">@anim/slide_in_bottom_vi</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_bottom_vi</item>
+    </style>
+    <style name="CustomSwitch" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/xanhnen</item> <!-- Màu khi Switch được bật -->
+        <item name="colorSwitchThumbNormal">#3F51B5</item> <!-- Màu của nút Switch -->
+    </style>
+    <style name="CustomDatePickerDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/xanhnen</item> <!-- Màu của nút và tiêu đề -->
+        <item name="android:buttonBarButtonStyle">@style/ButtonBarButtonStyle</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
+    </style>
+
+    <style name="ButtonBarButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/xanhnen</item> <!-- Màu của nút "Cancel" -->
+    </style>
+
+    <style name="PositiveButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/xanhnen</item> <!-- Màu của nút "OK" -->
+    </style>
 </resources>

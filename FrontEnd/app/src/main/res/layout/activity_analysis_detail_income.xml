@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".Analysis.AnalysisDetailIncome">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="10dp">
+        <ImageView
+            android:id="@+id/exit_Income"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:padding="5dp"
+            android:src="@drawable/back_line"
+            android:layout_marginLeft="10dp">
+        </ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:textStyle="bold"
+            android:text="Income"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            ></TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp">
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/blue_calendar">
+
+        </ImageView>
+        <TextView
+            android:id="@+id/date_lbl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="2023"
+            android:layout_marginLeft="10dp"
+            android:textSize="18dp"
+            android:textColor="@color/black">
+
+        </TextView>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/total_income"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:text="+10000000 đ"
+        android:layout_marginLeft="17dp"
+        android:layout_marginTop="10dp"
+        android:textSize="16dp"
+        android:textColor="#177715">
+
+    </TextView>
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/piechart"
+        android:layout_width="match_parent"
+        android:layout_height="188dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
+
+    </com.github.mikephil.charting.charts.PieChart>
+
+    <ListView
+        android:id="@+id/listvieww"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="10dp">
+
+    </ListView>
+</LinearLayout>
