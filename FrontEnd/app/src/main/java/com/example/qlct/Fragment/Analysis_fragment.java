@@ -35,7 +35,6 @@ import android.widget.Toast;
 import com.example.qlct.Analysis.AnalysisExpenseFragment;
 import com.example.qlct.Analysis.AnalysisIcomeFragment;
 import com.example.qlct.Analysis.AnalysisNetIncomeFragment;
-import com.example.qlct.Notification.Notificaiton_activity;
 
 
 import com.example.qlct.API_Entity.GetAllCategoryEntity;
@@ -49,7 +48,7 @@ import com.example.qlct.Analysis.AnalysisExpenseFragment;
 import com.example.qlct.Analysis.AnalysisIcomeFragment;
 import com.example.qlct.Analysis.AnalysisNetIncomeFragment;
 
-import com.example.qlct.Notification.Notificaiton_activity;
+import com.example.qlct.Notification.Notification_activity;
 
 import com.example.qlct.R;
 import com.example.qlct.SelectWallet_Adapter;
@@ -203,7 +202,7 @@ public class Analysis_fragment extends Fragment {
         bell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Notificaiton_activity.class);
+                Intent intent = new Intent(getActivity(), Notification_activity.class);
                 startActivity(intent);
             }
         });

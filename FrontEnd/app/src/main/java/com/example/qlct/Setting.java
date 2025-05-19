@@ -2,80 +2,63 @@ package com.example.qlct;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-import com.example.qlct.API_Entity.LoginResponse;
-import com.example.qlct.API_Entity.SharedDaTa;
-import com.example.qlct.API_Entity.UserProfile;
-import com.example.qlct.API_Utils.UserAPiUtil;
-import com.example.qlct.Fragment.Account_fragment;
 
 public class Setting extends AppCompatActivity {
-LinearLayout changemail;
-LinearLayout currency;
-TextView phone;
-LinearLayout changepass;
-ImageButton backsetting;
+    TextView phone;
+    LinearLayout changepass;
+    ImageButton backsetting;
+
+    // Mock data class to replace UserProfile
+    private static class MockUserProfile {
+        private static class Data {
+            String phone_number;
+            Data(String phone_number) {
+                this.phone_number = phone_number;
+            }
+            String getPhone_number() {
+                return phone_number;
+            }
+        }
+        Data data;
+        MockUserProfile(String phone_number) {
+            this.data = new Data(phone_number);
+        }
+        Data getData() {
+            return data;
+        }
+    }
+
+    // Mock user profile data
+    private MockUserProfile getMockUserProfile() {
+        return new MockUserProfile("+84 123 456 789");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_setting);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-        UserAPiUtil userAPiUtil = new UserAPiUtil();
-        UserProfile userProfile=userAPiUtil.getUserProfile();
 
-        phone=findViewById(R.id.phone);
-//        changemail=findViewById(R.id.changemail);
-        changepass=findViewById(R.id.changpass);
-        backsetting=findViewById(R.id.backsetting);
+        MockUserProfile userProfile = getMockUserProfile();
+
+        phone = findViewById(R.id.phone);
+
+        backsetting = findViewById(R.id.backsetting);
+
         String phoneNumber = userProfile.getData().getPhone_number();
-       phoneNumber="0"+ phoneNumber.substring(3);
+        phoneNumber = "0" + phoneNumber.substring(3);
         phone.setText(phoneNumber);
 
-//        currency.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                Log.d("Setting", "onCreate: ");
-//                Intent myintent=new Intent(Setting.this,Currency.class);
-//                startActivity(myintent);
-//                Log.d("Setting", "onCreate1: ");
-//            }
-//        });
-        backsetting.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                finish();
-            }
-        });
-//        changemail.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent myintent=new Intent(Setting.this, verification.class);
-//                startActivity(myintent);
-//            }
-//        });
-        changepass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myintent=new Intent(Setting.this,NewPassword.class);
-                startActivity(myintent);
-            }
+        backsetting.setOnClickListener(v -> finish());
+
+        changepass.setOnClickListener(v -> {
+            Intent myintent = new Intent(Setting.this, NewPassword.class);
+            startActivity(myintent);
         });
     }
 }

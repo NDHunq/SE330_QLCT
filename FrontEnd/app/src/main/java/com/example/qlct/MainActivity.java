@@ -284,8 +284,10 @@ tongsovi = getIntent().getDoubleExtra("tongsovi",0);
                         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, accountFragment).commit();
                     } else {
                         Log.d("Account", "User is not logged in");
-                        // Nếu người dùng chưa đăng nhập, chuyển hướng họ đến LoginActivity
-                        startActivity(new Intent(MainActivity.this, Login_Signin.class));
+//                         Nếu người dùng chưa đăng nhập, chuyển hướng họ đến LoginActivity  Account_fragment accountFragment = new Account_fragment();
+                        Account_fragment accountFragment = new Account_fragment();
+                                                // Sử dụng FragmentManager và FragmentTransaction để thay thế HomeFragment vào FrameLayout container
+                                                getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, accountFragment).commit();  startActivity(new Intent(MainActivity.this, Login_Signin.class));
                     }
                 } catch (Exception e) {
                     // Xử lý lỗi ở đây
