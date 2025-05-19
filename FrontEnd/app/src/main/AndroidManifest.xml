@@ -110,7 +110,7 @@
             android:exported="false"
             android:theme="@style/Theme.QLCT" />
         <activity
-            android:name=".Notification_activity"
+            android:name=".Notification.Notification_activity"
             android:exported="false" />
         <activity
             android:name=".Home.Home_Wallet_Information"
@@ -121,6 +121,7 @@
         <activity
             android:name=".Home.Home_My_wallets"
             android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -129,6 +130,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
 
         <meta-data
             android:name="preloaded_fonts"

@@ -98,9 +98,9 @@ public class TransactionDetail extends AppCompatActivity {
         // Mock data for wallets
         public static ArrayList<GetAllWalletsEntity> getMockWallets() {
             ArrayList<GetAllWalletsEntity> wallets = new ArrayList<>();
-            wallets.add(new GetAllWalletsEntity("1", "Personal Wallet", "1000000", "VND"));
-            wallets.add(new GetAllWalletsEntity("2", "Savings Wallet", "5000000", "VND"));
-            wallets.add(new GetAllWalletsEntity("3", "Travel Fund", "200000", "USD"));
+            wallets.add(new GetAllWalletsEntity("wallet1", "Cash", "1000000", "VND", "2025-01-01", "2025-05-01"));
+            wallets.add(new GetAllWalletsEntity("wallet2", "Bank", "5000000", "USD", "2025-01-01", "2025-05-01"));
+            wallets.add(new GetAllWalletsEntity("Total", "Total", "6000000", "VND", "2025-01-01", "2025-05-01"));
             return wallets;
         }
 

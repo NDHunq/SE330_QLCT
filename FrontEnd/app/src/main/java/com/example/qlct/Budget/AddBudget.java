@@ -58,7 +58,7 @@ import java.util.Locale;
 public class AddBudget extends AppCompatActivity implements OnDataPass {
     ImageView date_picker;
     TextView apply;
-    Dialog dialog ;
+    Dialog dialog;
     TextView renew;
     TextView noRenew;
     TextView crr;
@@ -67,20 +67,21 @@ public class AddBudget extends AppCompatActivity implements OnDataPass {
     String currency;
     ImageButton done;
     LinearLayout Select_category;
-    int sc=1;
-    int sb=1;
+    int sc = 1;
+    int sb = 1;
     TextView Category;
-    TextInputEditText  amount;
+    TextInputEditText amount;
     private ListView categoryListView;
     private List<Category2> categoryList;
     ImageView hinhanh;
     private TextView exit_budget;
     TextView type;
-    String date_unit="";
+    String date_unit = "";
     ArrayList<GetAllCategoryy> list;
     Switch switch1;
     TextInputLayout Amount_layout;
     TextInputLayout date_layout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,58 +92,48 @@ public class AddBudget extends AppCompatActivity implements OnDataPass {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        date_picker=this.findViewById(R.id.date_pickerr);
-        exit_budget=this.findViewById(R.id.exit_budget);
-        date=this.findViewById(R.id.date);
-        crr=this.findViewById(R.id.crr);
-        done=this.findViewById(R.id.done);
-        Category=this.findViewById(R.id.Category_txt);
-        amount=this.findViewById(R.id.Amount_txtbox);
-        Select_category=this.findViewById(R.id.Select_category);
-        hinhanh=this.findViewById(R.id.hinhanh);
-        type=this.findViewById(R.id.type);
-        switch1 = this.findViewById(R.id.switch1);
-        Amount_layout=this.findViewById(R.id.Amount_layout);
-        date_layout=this.findViewById(R.id.date_layout);
+        date_picker = findViewById(R.id.date_pickerr);
+        exit_budget = findViewById(R.id.exit_budget);
+        date = findViewById(R.id.date);
+        crr = findViewById(R.id.crr);
+        done = findViewById(R.id.done);
+        Category = findViewById(R.id.Category_txt);
+        amount = findViewById(R.id.Amount_txtbox);
+        Select_category = findViewById(R.id.Select_category);
+        hinhanh = findViewById(R.id.hinhanh);
+        type = findViewById(R.id.type);
+        switch1 = findViewById(R.id.switch1);
+        Amount_layout = findViewById(R.id.Amount_layout);
+        date_layout = findViewById(R.id.date_layout);
+        // Khởi tạo mock data
+        initializeMockData();
         GetAllCategory();
+
         done.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                String currency ;
-                if(crr.getText().toString().equals("$"))
-                {
-                    currency="USD";
+                String currency;
+                if (crr.getText().toString().equals("$")) {
+                    currency = "USD";
+                } else if (crr.getText().toString().equals("đ")) {
+                    currency = "VND";
+                } else if (crr.getText().toString().equals("€")) {
+                    currency = "EUR";
+                } else {
+                    currency = "JPY";
                 }
-                else if(crr.getText().toString().equals("đ"))
-                {
-                    currency="VND";
-                }
-                else if(crr.getText().toString().equals("€"))
-                {
-                    currency="EUR";
-                }
-                else
-                {
-                    currency="JPY";
-                }
-                if(!validdate())
-                {
-                    Toast.makeText(AddBudget.this, "Error(s) has occured", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
+                if (!validdate()) {
+                    Toast.makeText(AddBudget.this, "Error(s) has occurred", Toast.LENGTH_SHORT).show();
+                } else {
                     BudgetAPIUtil budgetAPIUtil = new BudgetAPIUtil();
-                    Boolean enable_notification= switch1.isChecked();
-                    if(type.getText()=="Renew") {
-                        if(String.valueOf(date.getText()).equals("Daily")||String.valueOf(date.getText()).equals("Weekly") || String.valueOf(date.getText()).equals("Monthly") || String.valueOf(date.getText()).equals("Yearly"))
-                        {
+                    Boolean enable_notification = switch1.isChecked();
+                    if (type.getText().equals("Renew")) {
+                        if (String.valueOf(date.getText()).equals("Daily") || String.valueOf(date.getText()).equals("Weekly") || String.valueOf(date.getText()).equals("Monthly") || String.valueOf(date.getText()).equals("Yearly")) {
                             CreateRenewBudgetEntity createRenewBudgetEntity = new CreateRenewBudgetEntity(GetIDCategory(Category.getText().toString()), Double.parseDouble(amount.getText().toString()), date.getText().toString(), enable_notification, currency);
                             budgetAPIUtil.createRenewBudget(createRenewBudgetEntity);
-                        }
-                        else
-                        {
-                            String realDate=date.getText().toString();;
+                        } else {
+                            String realDate = date.getText().toString();
                             SimpleDateFormat originalFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
                             SimpleDateFormat targetFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
                             try {
@@ -151,24 +142,19 @@ public class AddBudget extends AppCompatActivity implements OnDataPass {
                             } catch (ParseException e) {
                                 e.printStackTrace();
                             }
-
-
-                            CreateRenewBudgetEntity createRenewBudgetEntity = new CreateRenewBudgetEntity(GetIDCategory(Category.getText().toString()), Double.parseDouble(amount.getText().toString()),"Custom", realDate+" 00:00:00", enable_notification, currency);
+                            CreateRenewBudgetEntity createRenewBudgetEntity = new CreateRenewBudgetEntity(GetIDCategory(Category.getText().toString()), Double.parseDouble(amount.getText().toString()), "Custom", realDate + " 00:00:00", enable_notification, currency);
                             budgetAPIUtil.createRenewBudget(createRenewBudgetEntity);
                         }
-                    }
-                    else {
-                        String realDate=date.getText().toString();;
-                        if(date_unit!="Day")
-                        {
-                            realDate=realDate.replace(" - ", " ");
+                    } else {
+                        String realDate = date.getText().toString();
+                        if (!date_unit.equals("Day")) {
+                            realDate = realDate.replace(" - ", " ");
                         }
                         CreateNoRenewBudgetEntity createNoRenewBudgetEntity = new CreateNoRenewBudgetEntity(GetIDCategory(Category.getText().toString()), Double.parseDouble(amount.getText().toString()), date_unit.toUpperCase(), realDate, enable_notification, currency);
                         budgetAPIUtil.createNoRenewBudget(createNoRenewBudgetEntity);
                     }
                     finish();
                 }
-
             }
         });
 
@@ -202,7 +188,7 @@ public class AddBudget extends AppCompatActivity implements OnDataPass {
                 ShowDialogSelectCate();
             }
         });
-        try{
+        try {
             amount.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -220,10 +206,10 @@ public class AddBudget extends AppCompatActivity implements OnDataPass {
                     validateAmount();
                 }
             });
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        try{
+        try {
             date.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -241,29 +227,45 @@ public class AddBudget extends AppCompatActivity implements OnDataPass {
                     validateDate();
                 }
             });
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
-    void GetAllCategory()
-    {
-        list=new CategoryAPIUntill().getAllCategoryys();
+
+    // Hàm khởi tạo dữ liệu mock
+    private void initializeMockData() {
+        list = new ArrayList<>();
+        // Mock 8 danh mục EXPENSE
+        list.add(new GetAllCategoryy("1", "Food",  "https://cdn-icons-png.flaticon.com/512/9417/9417083.png","EXPENSE", "user1"));
+        list.add(new GetAllCategoryy("2", "Transport",  "https://cdn-icons-png.freepik.com/512/3158/3158155.png","EXPENSE", "user1"));
+        list.add(new GetAllCategoryy("3", "Shopping",  "https://cdn.iconscout.com/icon/free/png-256/free-shopping-icon-download-in-svg-png-gif-file-formats--mall-center-buying-clothes-grocery-purchasing-activities-flat-icons-pack-user-interface-1185355.png", "EXPENSE","user1"));
+        list.add(new GetAllCategoryy("4", "Entertainment",  "https://cdn-icons-png.flaticon.com/512/6008/6008427.png", "EXPENSE","user1"));
+        list.add(new GetAllCategoryy("5", "Bills",  "https://cdn-icons-png.flaticon.com/512/1649/1649577.png","EXPENSE", "user1"));
+        list.add(new GetAllCategoryy("6", "Travel",  "https://png.pngtree.com/png-clipart/20190628/original/pngtree-vacation-and-travel-icon-png-image_4032146.jpg", "EXPENSE","user1"));
+        // Log để kiểm tra
+        android.util.Log.d("AddBudget", "Mock categories initialized: " + list.size());
     }
-    String GetIDCategory(String name)
-    {
-        for(int i=0;i<list.size();i++)
-        {
-            if(list.get(i).getName().equals(name))
-            {
+
+    void GetAllCategory() {
+        // list = new CategoryAPIUntill().getAllCategoryys(); // Comment gọi API
+        // initializeMockData đã được gọi trong onCreate
+    }
+
+    String GetIDCategory(String name) {
+        if (list == null) {
+            android.util.Log.e("AddBudget", "list is null in GetIDCategory");
+            return "";
+        }
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getName().equals(name)) {
                 return list.get(i).getId();
             }
         }
+        android.util.Log.w("AddBudget", "Category not found: " + name);
         return "";
     }
-    void ShowDialogSelectCate()
-    {
+
+    void ShowDialogSelectCate() {
         final Dialog dialog = new Dialog(AddBudget.this);
 
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -273,11 +275,16 @@ public class AddBudget extends AppCompatActivity implements OnDataPass {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationn;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
-                dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_bgh);
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_bgh);
         dialog.show();
 
         categoryListView = dialog.findViewById(R.id.select_category_listview);
         AnhXaCategory();
+        // Log để kiểm tra categoryList
+        android.util.Log.d("AddBudget", "categoryList size: " + (categoryList != null ? categoryList.size() : "null"));
+        if (categoryList == null || categoryList.isEmpty()) {
+            Toast.makeText(AddBudget.this, "No categories available", Toast.LENGTH_SHORT).show();
+        }
         Category_adapter2 categoryAdapter = new Category_adapter2(dialog.getContext(), R.layout.category_list_item, categoryList);
         categoryListView.setAdapter(categoryAdapter);
 
@@ -294,29 +301,35 @@ public class AddBudget extends AppCompatActivity implements OnDataPass {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Category2 clickedCategory = categoryList.get(position);
                 Category.setText(clickedCategory.getCategory_name());
-                //hinhanh.setImageResource(clickedCategory.getImage());
                 Glide.with(AddBudget.this).load(clickedCategory.getImage()).into(hinhanh);
                 dialog.dismiss();
             }
         });
     }
-    private void AnhXaCategory(){
+
+    private void AnhXaCategory() {
         categoryList = new ArrayList<>();
-        ArrayList<GetAllCategoryy> list = new CategoryAPIUntill().getAllCategoryys();
-        for (int i = 0; i < list.size(); i++) {
-            if(list.get(i).getType().equals("EXPENSE"))
-                categoryList.add(new Category2(list.get(i).getName(), list.get(i).getPicture()));
+        if (list == null) {
+            android.util.Log.e("AddBudget", "list is null in AnhXaCategory");
+            return;
         }
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getType().equals("EXPENSE")) {
+                categoryList.add(new Category2(list.get(i).getName(), list.get(i).getPicture()));
+            }
+        }
+        android.util.Log.d("AddBudget", "AnhXaCategory completed, categoryList size: " + categoryList.size());
     }
-    void ShowDialog()
-    {
-           MyDialogFragment dialogFragment;
-           dialogFragment = new MyDialogFragment();
-           dialogFragment.show(getSupportFragmentManager(), "tag");
+
+    void ShowDialog() {
+        MyDialogFragment dialogFragment;
+        dialogFragment = new MyDialogFragment();
+        dialogFragment.show(getSupportFragmentManager(), "tag");
     }
-    private void showDialog1()
-    { final Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(dialog.getWindow().FEATURE_NO_TITLE);
+
+    private void showDialog1() {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.bottomsheet_currency);
         dialog.show();
         dialog.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -329,20 +342,13 @@ public class AddBudget extends AppCompatActivity implements OnDataPass {
         LinearLayout bo3 = dialog.findViewById(R.id.bo3);
         LinearLayout bo4 = dialog.findViewById(R.id.bo4);
         TextView txt1 = findViewById(R.id.crr);
-        if(txt1.getText().toString().equals("$"))
-        {
+        if (txt1.getText().toString().equals("$")) {
             bo1.setBackgroundResource(R.drawable.nenluachon);
-        }
-        else if(txt1.getText().toString().equals("đ"))
-        {
+        } else if (txt1.getText().toString().equals("đ")) {
             bo2.setBackgroundResource(R.drawable.nenluachon);
-        }
-        else if(txt1.getText().toString().equals("€"))
-        {
+        } else if (txt1.getText().toString().equals("€")) {
             bo3.setBackgroundResource(R.drawable.nenluachon);
-        }
-        else if(txt1.getText().toString().equals("¥"))
-        {
+        } else if (txt1.getText().toString().equals("¥")) {
             bo4.setBackgroundResource(R.drawable.nenluachon);
         }
 
@@ -354,7 +360,6 @@ public class AddBudget extends AppCompatActivity implements OnDataPass {
                 bo2.setBackgroundResource(0);
                 bo3.setBackgroundResource(0);
                 bo4.setBackgroundResource(0);
-
             }
         });
         bo2.setOnClickListener(new View.OnClickListener() {
@@ -399,33 +404,31 @@ public class AddBudget extends AppCompatActivity implements OnDataPass {
             }
         });
     }
-    public void SetData(String data)
-    {
+
+    public void SetData(String data) {
         date.setText(data);
     }
-    public void SetType(String data)
-    {
+
+    public void SetType(String data) {
         type.setText(data);
     }
-    public void SetDateUnit(String unit)
-    {
-        date_unit=unit;
+
+    public void SetDateUnit(String unit) {
+        date_unit = unit;
     }
+
     public void onDataPass(String data) {
         date.setText(data);
     }
+
     private boolean validateAmount() {
-
         String amountInput = amount.getText().toString().replaceAll("[.,]", "").trim();
-
-
-        if(!amountInput.isEmpty()){
+        if (!amountInput.isEmpty()) {
             Amount_layout.setError(null);
             amount.setTextColor(getResources().getColor(R.color.xanhnen, null));
             Amount_layout.setPrefixTextColor(ColorStateList.valueOf(getResources().getColor(R.color.xanhnen, null)));
             return true;
-        }
-        else{
+        } else {
             Amount_layout.setError("Amount can't be empty!");
             return false;
         }
@@ -434,24 +437,20 @@ public class AddBudget extends AppCompatActivity implements OnDataPass {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private boolean validateDate() {
         String dateInput = date.getText().toString().trim();
-
         if (!dateInput.isEmpty()) {
             date_layout.setError(null);
             date.setTextColor(ColorStateList.valueOf(getResources().getColor(R.color.black, null)));
             return true;
-        }
-        else{
+        } else {
             date_layout.setError("Please press calendar icon to select a date!");
             return false;
         }
     }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
-    boolean validdate()
-    {
-        boolean a=validateAmount();
-        boolean b=validateDate();
-        return a&&b;
-
+    boolean validdate() {
+        boolean a = validateAmount();
+        boolean b = validateDate();
+        return a && b;
     }
-
 }
