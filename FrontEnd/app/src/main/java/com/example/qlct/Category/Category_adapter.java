@@ -4,57 +4,58 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.qlct.R;
-import com.google.android.material.card.MaterialCardView;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class Category_adapter extends BaseAdapter {
-    private Context context;
+public class Category_adapter extends ArrayAdapter<Category_hdp> {
 
-    private int layout;
-
-    private List<Category_hdp> categoryList;
-
-    public Category_adapter(Context context, int layout, List<Category_hdp> categoryList) {
-        this.context = context;
-        this.layout = layout;
-        this.categoryList = categoryList;
+    public Category_adapter(@NonNull Context context, int resource, @NonNull List<Category_hdp> objects) {
+        super(context, resource, objects);
     }
 
+    @NonNull
     @Override
-    public int getCount() {
-        return categoryList.size();
-    }
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        ViewHolder holder;
 
-    @Override
-    public Object getItem(int i) {
-        return null;
-    }
+        if (convertView == null) {
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            convertView = inflater.inflate(R.layout.category_list_item, parent, false); // Giả sử tên file là category_list_item.xml
 
-    @Override
-    public long getItemId(int i) {
-        return 0;
-    }
+            holder = new ViewHolder();
+            holder.categoryIconImageView = convertView.findViewById(R.id.category_icon);
+            holder.categoryNameTextView = convertView.findViewById(R.id.category_txtview);
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
+        }
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        convertView = inflater.inflate(layout, null);
-        ImageView categoryIcon = convertView.findViewById(R.id.category_icon);
-        TextView categoryName = convertView.findViewById(R.id.category_txtview);
+        Category_hdp currentCategory = getItem(position);
 
+        if (currentCategory != null) {
+            holder.categoryNameTextView.setText(currentCategory.getCategory_name());
 
-        Category_hdp category = categoryList.get(position);
-        Glide.with(context).load(category.getImageURL()).into(categoryIcon);
-
-        categoryName.setText(category.getCategory_name());
+            Glide.with(getContext())
+                    .load(currentCategory.getImageURL())
+                    .placeholder(R.drawable.circle_icon)
+                    .error(R.drawable.circle_icon)
+                    .into(holder.categoryIconImageView);
+        }
         return convertView;
+    }
+
+    private static class ViewHolder {
+        ImageView categoryIconImageView;
+        TextView categoryNameTextView;
     }
 }

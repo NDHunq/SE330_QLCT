@@ -66,7 +66,7 @@
             android:layout_marginLeft="20dp"
             android:textColor="@color/black"
             android:textSize="25dp"
-            android:text="Phone">
+            android:text="Username">
         </TextView>
 
 
@@ -80,7 +80,7 @@
             android:gravity="center_vertical"
             >
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/phone_layout"
+                android:id="@+id/username_layout"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="42dp"
                 android:layout_height="match_parent"
@@ -95,10 +95,10 @@
                 app:errorEnabled="true"
                 app:boxStrokeWidth="2dp">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/phone"
+                    android:id="@+id/username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
+                    android:inputType="text"
                     android:textSize="17sp"
                     android:textColor="#1EABED"
                     android:textStyle="bold"

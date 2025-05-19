@@ -109,7 +109,7 @@ public class TransactionAPIUtil extends AppCompatActivity {
 
 
 
-    public void createTransactionAPI(CreateTransactionEntity createTransactionEntity){
+    public boolean createTransactionAPI(CreateTransactionEntity createTransactionEntity){
         try {
             OkHttpClient client = new OkHttpClient().newBuilder()
                     .build();
@@ -127,6 +127,7 @@ public class TransactionAPIUtil extends AppCompatActivity {
         }catch (Exception e){
             e.printStackTrace();
         }
+        return true;
     }
 
 }
