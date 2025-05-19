@@ -30,7 +30,7 @@ import com.example.qlct.API_Utils.CategoryAPIUtil;
 import com.example.qlct.Budget.AddBudget;
 import com.example.qlct.Budget.BudgetFinishFragment;
 import com.example.qlct.Budget.BudgetRunningFragment;
-import com.example.qlct.Notification.Notificaiton_activity;
+import com.example.qlct.Notification.Notification_activity;
 import com.example.qlct.R;
 import com.example.qlct.doitiente;
 
@@ -124,7 +124,7 @@ public class Budget_fragment extends Fragment {
         bell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Notificaiton_activity.class);
+                Intent intent = new Intent(getActivity(), Notification_activity.class);
                 startActivity(intent);
             }
         });
