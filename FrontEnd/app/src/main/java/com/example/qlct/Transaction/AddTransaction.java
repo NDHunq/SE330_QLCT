@@ -221,6 +221,13 @@ public class AddTransaction extends AppCompatActivity {
                     walletList.add(new Wallet_hdp(item.id, item.name, item.amount, R.drawable.wallet, item.currency_unit));
                 }
             }
+            else {
+                // Dữ liệu mẫu nếu API lỗi hoặc để demo
+                Log.w("AddTransaction", "AnhXaWallet: API returned null, using mock data.");
+                walletList.add(new Wallet_hdp("wallet_id_1_mock", "Cash ", "1000000", R.drawable.wallet, "VND"));
+                walletList.add(new Wallet_hdp("wallet_id_2_mock", "Bank Account", "5000000", R.drawable.wallet, "USD"));
+                walletList.add(new Wallet_hdp("wallet_id_3_mock", "Credit Card ", "2000000", R.drawable.wallet, "EUR"));
+            }
             Log.d("Get_wallet_data_object", walletList.toString());
         } catch (Exception e) {
             e.printStackTrace();
