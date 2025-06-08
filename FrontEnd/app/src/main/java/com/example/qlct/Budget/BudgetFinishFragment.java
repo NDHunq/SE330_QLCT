@@ -106,7 +106,7 @@ public class BudgetFinishFragment extends Fragment {
 
                         from = "";
                         to = allBudgets.get(i).getNo_renew_date();
-                        if(!IsNowBeforeDay(to))
+                        if(to != null && !to.trim().isEmpty() && !IsNowBeforeDay(to))
                         {
                             Budget budget = new Budget(GetNameCategory(allBudgets.get(i).getCategory_id()),Double.valueOf(allBudgets.get(i).getLimit_amount()) ,Double.valueOf(allBudgets.get(i).getExpensed_amount()) ,from,to,allBudgets.get(i).getCategory().getPicture(),allBudgets.get(i).getBudget_type(),allBudgets.get(i).getId(),allBudgets.get(i).getCurrency_unit());
                             list.add(budget);
@@ -120,7 +120,7 @@ public class BudgetFinishFragment extends Fragment {
                         if(dates.length == 2) {
                             from ="From: "+ dates[0];
                             to = "To: "+dates[1];
-                            if(!IsNowBeforeDay(dates[1]))
+                            if(dates[1] != null && !dates[1].trim().isEmpty() && !IsNowBeforeDay(dates[1]))
                             {
                                 Budget budget = new Budget(GetNameCategory(allBudgets.get(i).getCategory_id()),Double.valueOf(allBudgets.get(i).getLimit_amount()) ,Double.valueOf(allBudgets.get(i).getExpensed_amount()) ,from,to,allBudgets.get(i).getCategory().getPicture(),allBudgets.get(i).getBudget_type(),allBudgets.get(i).getId(),allBudgets.get(i).getCurrency_unit());
                                 list.add(budget);
@@ -134,10 +134,24 @@ public class BudgetFinishFragment extends Fragment {
             Log.d("BudgetRunningFragment", "allBudgets is null");
         }
     }
+
+    // Helper to normalize date string to dd-MM-yyyy
+    private String normalizeDate(String date) {
+        if (date == null) return "";
+        String[] parts = date.split("-");
+        if (parts.length != 3) return date;
+        String day = parts[0].length() == 1 ? "0" + parts[0] : parts[0];
+        String month = parts[1].length() == 1 ? "0" + parts[1] : parts[1];
+        return day + "-" + month + "-" + parts[2];
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     boolean IsNowBeforeDay(String date) {
+        if (date == null || date.trim().isEmpty()) {
+            return false;
+        }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate inputDate = LocalDate.parse(date, formatter);
+        LocalDate inputDate = LocalDate.parse(normalizeDate(date), formatter);
         LocalDate currentDate = LocalDate.now();
 
         return currentDate.isBefore(inputDate);

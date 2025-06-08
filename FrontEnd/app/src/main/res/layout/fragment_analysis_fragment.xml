@@ -134,15 +134,15 @@
                     android:layout_marginStart="0dp"
                     android:src="@drawable/back">
                 </ImageView>
+
                 <TextView
                     android:id="@+id/date"
                     android:layout_width="80dp"
-                    android:text="06-2024"
+                    android:layout_height="match_parent"
                     android:gravity="center"
+                    android:text="06-2025"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
-                    android:layout_height="match_parent">
-                </TextView>
+                    android:textSize="16dp"></TextView>
                 <ImageView
                     android:id="@+id/next"
                     android:layout_width="40dp"

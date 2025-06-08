@@ -5,7 +5,7 @@ import com.example.qlct.API_Entity.LoginResponse;
 import com.example.qlct.API_Entity.SharedDaTa;
 
 public class API_Config {
-    public static String SERVER = "http://13.213.49.173";
+    public static String SERVER = "https://3982-14-169-55-118.ngrok-free.app";
     public static String API_VERSION = "api/v1";
     public static  String TEST_LOGIN_TOKEN = null;
     public void setTestLoginToken(String token)
