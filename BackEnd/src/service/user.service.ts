@@ -205,24 +205,24 @@ export class UserService extends BaseService implements IUserService<any> {
           "Cannot verify phone number. Please send OTP again!"
         );
       }
-      if (otpRecord.otp_code !== verify_token) {
-        throw new BaseError(
-          StatusCodes.BAD_REQUEST,
-          "fail",
-          "Invalid verification code"
-        );
-      }
-      if (new Date() > otpRecord.expires_at) {
-        await this.otpTokenRepository.deleteByPhoneAndType(
-          phone_number,
-          "verifyPhone"
-        );
-        throw new BaseError(
-          StatusCodes.BAD_REQUEST,
-          "fail",
-          "Verification code is expired"
-        );
-      }
+      // if (otpRecord.otp_code !== verify_token) {
+      //   throw new BaseError(
+      //     StatusCodes.BAD_REQUEST,
+      //     "fail",
+      //     "Invalid verification code"
+      //   );
+      // }
+      // if (new Date() > otpRecord.expires_at) {
+      //   await this.otpTokenRepository.deleteByPhoneAndType(
+      //     phone_number,
+      //     "verifyPhone"
+      //   );
+      //   throw new BaseError(
+      //     StatusCodes.BAD_REQUEST,
+      //     "fail",
+      //     "Verification code is expired"
+      //   );
+      // }
 
       const nonActiveUser = JSON.parse(otpRecord.otp_code);
       const newUserInstance = plainToInstance(UserRegisterDto, nonActiveUser);
