@@ -1,0 +1,15 @@
+{
+    "server": {
+        "port":  80,
+        "host": "http://13.215.179.128",
+        "media_root": "http://13.215.179.128"
+
+    },
+    "helmet": true,
+    "enviroment": "production",
+    "cors": {
+        "origin": "*",
+        "methods": ["GET", "POST", "PUT", "DELETE", "UPDATE"],
+        "allowedHeaders": ["X-Requested-With", "X-HTTP-Method-Override", "Content-Type", "Accept", "Observe", "Authorization"]
+    }
+}
